@@ -3,9 +3,9 @@
 
 function immutableInit(config) {
 
-  // https://github.com/facebook/react/blob/v15.0.1/src/isomorphic/classic/element/ReactElement.js#L21
-  var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element');
-  var REACT_ELEMENT_TYPE_FALLBACK = 0xeac7;
+  // https://github.com/facebook/react/blob/v19.0.0/packages/shared/ReactSymbols.js#L16
+  var REACT_LEGACY_ELEMENT_TYPE = Symbol.for('react.element');
+  var REACT_ELEMENT_TYPE = Symbol.for('react.transitional.element')
 
   var globalConfig = {
     use_static: false
@@ -604,7 +604,7 @@ function immutableInit(config) {
   function isReactElement(obj) {
     return typeof obj === 'object' &&
            obj !== null &&
-           (obj.$$typeof === REACT_ELEMENT_TYPE_FALLBACK || obj.$$typeof === REACT_ELEMENT_TYPE);
+           (obj.$$typeof === REACT_ELEMENT_TYPE || obj.$$typeof === REACT_LEGACY_ELEMENT_TYPE);
   }
 
   function isFileObject(obj) {
